@@ -12,8 +12,6 @@ def remove_price_tag(value):
     return value.replace(' ','').strip()
 
 
-def remove_newline(value):
-    return value.replace('\n\n', '').replace('\n', '').replace('\\', '').strip()
 
 
 class CianscraperItem(scrapy.Item):
@@ -27,12 +25,3 @@ class CianscraperItem(scrapy.Item):
     page_number = scrapy.Field(input_processor=MapCompose(remove_tags), output_processor=TakeFirst())
 
 
-def remove_currency(value):
-    return value.replace('£','').strip()
-
-class WhiskyscraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    name = scrapy.Field(input_processor = MapCompose(remove_tags), output_processor = TakeFirst())
-    price = scrapy.Field(input_processor = MapCompose(remove_tags, remove_currency), output_processor = TakeFirst())
-
-    link = scrapy.Field()
